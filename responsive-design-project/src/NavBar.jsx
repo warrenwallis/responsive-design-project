@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 const NavBar = () => {
     const [showNav, setShowNav] = useState(false);
 
-    useEffect(()=> {
-        window.addEventListener('resize', ()=>setShowNav(false))
-    },[])
+    useEffect(() => {
+        const handleResize = () => setShowNav(false);
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+    
 
     return (
         <div className="flex justify-center bg-violet-100 mb-16">
